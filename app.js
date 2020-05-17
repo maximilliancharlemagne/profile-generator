@@ -9,6 +9,12 @@ const profileGenerator = require('./lib/profileGenerator.js')
 
 //Create some questions for the prompts
 
+let companyQuestion = {
+  type: 'input',
+  name: 'company',
+  message: 'What is the name of your company?'
+}
+
 let nameQuestion = {
   type: 'input',
   name: 'name',
@@ -58,10 +64,12 @@ myTeam = { company: 'Apple Inc.', manager: {}, employees: [] }
 
 //Prompt for the manager's information
 
-console.log('Please input the information of the team manager to begin.')
 
-prompt([nameQuestion,idQuestion,emailQuestion,managerQuestion])
+console.log('Please input the comapny name and the information of the team manager to begin.')
+
+prompt([companyQuestion,nameQuestion,idQuestion,emailQuestion,managerQuestion])
 .then(managerData => {
+  myTeam.company = managerData.company
   let myManager = new Manager(managerData.name,managerData.id,managerData.email,managerData.officeNumber)
   myTeam.manager = myManager
   console.log('Please input the information of the first employee on the team.')
